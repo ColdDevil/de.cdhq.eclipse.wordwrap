@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension point="org.eclipse.ui.commands">
+        <!-- Command for toggle soft wrap -->
+        <command
+                description="Toggles soft word wrapping of current editor"
+                id="de.cdhq.eclipse.wordwrap.toggleCommand"
+                name="Toggle Word Wrap">
+        </command>
+        <!-- Command for toggle soft wrap in all open editors -->
+        <command
+                description="Activates soft word wrapping in all open editors"
+                id="de.cdhq.eclipse.wordwrap.activateAllCommand"
+                name="Activate Word Wrap in all open Editors">
+        </command>
+    </extension>
+
+    <extension point="org.eclipse.ui.handlers">
+        <!-- Handler for activating toggle command -->            
+        <handler
+            class="de.cdhq.eclipse.wordwrap.plugin.ToggleCommandHandler"
+            commandId="de.cdhq.eclipse.wordwrap.toggleCommand">
+        </handler>
+        <!-- Handler for activating toggle-all command -->       
+        <handler
+            class="de.cdhq.eclipse.wordwrap.plugin.ActivateAllCommandHandler"
+            commandId="de.cdhq.eclipse.wordwrap.activateAllCommand">
+        </handler>
+    </extension>
+    
+    <!-- Add Menu Entries -->
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution locationURI="menu:edit?after=additions">
+            <command
+               commandId="de.cdhq.eclipse.wordwrap.toggleCommand">
+            </command>
+        </menuContribution>
+        <menuContribution locationURI="menu:edit?after=additions">
+            <command
+               commandId="de.cdhq.eclipse.wordwrap.activateAllCommand">
+            </command>
+        </menuContribution>
+    </extension>
+    
+    <!-- Add context menu entry -->
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+            <command
+                commandId="de.cdhq.eclipse.wordwrap.toggleCommand"
+                style="toggle">
+                <visibleWhen checkEnabled="false">
+                    <with variable="activeEditor">
+                        <instanceof
+                            value="org.eclipse.ui.IEditorPart">
+                        </instanceof>
+                    </with>
+                </visibleWhen>
+            </command>
+        </menuContribution>
+    </extension>
+    
+    <!-- Keyboard shortcut for single toggling: CTRL+ALT+E on Windows, CMD+ALT+E on OS X -->
+    <extension point="org.eclipse.ui.bindings">
+        <key
+            commandId="de.cdhq.eclipse.wordwrap.toggleCommand"
+            sequence="M1+M3+E"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" />
+    </extension>
+</plugin>

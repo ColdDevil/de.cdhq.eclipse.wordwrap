@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Wordwrap
+Bundle-SymbolicName: de.cdhq.eclipse.wordwrap;singleton:=true
+Bundle-Version: 0.0.7
+Bundle-Activator: de.cdhq.eclipse.wordwrap.plugin.Activator
+Bundle-Vendor: CDHQ.de
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.workbench.texteditor;bundle-version="3.7.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
