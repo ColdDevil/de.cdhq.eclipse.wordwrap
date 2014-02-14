@@ -14,8 +14,6 @@ package de.cdhq.eclipse.wordwrap.plugin;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
@@ -29,31 +27,21 @@ import org.eclipse.ui.handlers.HandlerUtil;
  * @author Florian Weßling <flo@cdhq.de>
  */
 public class ActivateAllCommandHandler extends AbstractHandler {
-
     public Object execute(ExecutionEvent event) throws ExecutionException {
-        // get workbench window and current page to access editors
+        // get workbench window and the current page to access editors
         IWorkbenchWindow wb = HandlerUtil.getActiveWorkbenchWindow(event); // org.eclipse.ui.internal.WorkbenchWindow
         IWorkbenchPage page = wb.getActivePage();
 
-        // iterate open editors
+        // iterate all open editors
         IEditorReference[] editors = page.getEditorReferences();
 
         for (IEditorReference e : editors) {
+            // get editor and reactivate it
             IEditorPart editor = e.getEditor(true);
 
-            if (editor != null) {
-                // editor (IEditorPart) adapter returns StyledText
-                Object text = editor.getAdapter(Control.class);
-                if (text instanceof StyledText) {
-                    StyledText styledText = (StyledText) text;
-
-                    // enable wrapping
-                    styledText.setWordWrap(true);
-                }
-            }
+            WordWrapUtils.setWordWrap(editor, true);
         }
 
         return null;
     }
-
 }

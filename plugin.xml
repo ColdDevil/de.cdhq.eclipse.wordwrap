@@ -67,4 +67,21 @@
             sequence="M1+M3+E"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" />
     </extension>
+    
+    <!-- Handler for registering listeners at startup (workaround, because unfortunately this is not recommended) -->
+    <extension point="org.eclipse.ui.startup">
+        <startup class="de.cdhq.eclipse.wordwrap.plugin.StartupHandler" />
+    </extension>
+    
+    <!-- Preferences -->
+    <extension point="org.eclipse.ui.preferencePages">
+        <page id="preferences.de.cdhq.eclipse.wordwrap"
+            name="Word Wrap"
+            class="de.cdhq.eclipse.wordwrap.plugin.WordWrapPreferencePage">
+        </page>
+    </extension>
+    
+    <extension point="org.eclipse.core.runtime.preferences">
+        <initializer class="de.cdhq.eclipse.wordwrap.plugin.WordWrapPreferencePageInitializer" />
+    </extension>
 </plugin>
