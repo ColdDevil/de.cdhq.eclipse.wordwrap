@@ -24,7 +24,7 @@ public class WordWrapPreferencePage extends FieldEditorPreferencePage implements
     protected void createFieldEditors() {
         // is auto word wrap enabled?
         addField(new BooleanFieldEditor("de.cdhq.eclipse.wordwrap.autoenable.enabled",
-                                        "Enable word wrap automatically for the following file extensions",
+                                        "Enable word wrap automatically for the following file extensions:",
                                         getFieldEditorParent()));
 
         // list of file extensions for auto word wrap

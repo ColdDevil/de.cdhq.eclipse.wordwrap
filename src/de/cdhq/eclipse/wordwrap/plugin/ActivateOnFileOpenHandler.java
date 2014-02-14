@@ -35,9 +35,6 @@ public class ActivateOnFileOpenHandler {
             return;
         }
 
-        // get extensions from preference store
-        String[] extensions = ExtensionListFieldEditor.parseString(preferenceStore.getString("de.cdhq.eclipse.wordwrap.autoenable.extensions"), ";");
-
         IWorkbenchPart part = partRef.getPart(true);
         if (part instanceof IEditorPart) {
             /*
@@ -67,11 +64,22 @@ public class ActivateOnFileOpenHandler {
             if (file != null) {
                 String fileExtension = file.getFileExtension();
 
+                // stop if file extension is empty
+                if (fileExtension.isEmpty()) {
+                    return;
+                }
+
+                // get extensions from preference store
+                String[] extensions = ExtensionListFieldEditor.parseString(preferenceStore.getString("de.cdhq.eclipse.wordwrap.autoenable.extensions"));
+
                 // check if extension is covered by extensioned selected in preferences
                 for (String ext : extensions) {
                     if (ext.equals(fileExtension)) {
                         // extension found: activate wrapping
                         WordWrapUtils.setWordWrap(editorPart, true);
+
+                        // no further action necessary
+                        return;
                     }
                 }
             }

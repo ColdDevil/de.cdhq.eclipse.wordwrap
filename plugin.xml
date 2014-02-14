@@ -73,14 +73,13 @@
         <startup class="de.cdhq.eclipse.wordwrap.plugin.StartupHandler" />
     </extension>
     
-    <!-- Preferences -->
+    <!-- Preference page -->
     <extension point="org.eclipse.ui.preferencePages">
         <page id="preferences.de.cdhq.eclipse.wordwrap"
             name="Word Wrap"
             class="de.cdhq.eclipse.wordwrap.plugin.WordWrapPreferencePage">
         </page>
     </extension>
-    
     <extension point="org.eclipse.core.runtime.preferences">
         <initializer class="de.cdhq.eclipse.wordwrap.plugin.WordWrapPreferencePageInitializer" />
     </extension>
