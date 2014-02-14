@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.cdhq.eclipse.wordwrap.plugin;
 
+import java.util.Arrays;
+
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -186,8 +188,7 @@ public class ExtensionListFieldEditor extends FieldEditor {
      *            String of concatenated items
      */
     private void setList(String items) {
-        String[] itemArray = parseString(items);
-        list.setItems(itemArray);
+        list.setItems(parseString(items));
     }
 
     /**
@@ -196,8 +197,8 @@ public class ExtensionListFieldEditor extends FieldEditor {
     private void addStringToList() {
         String str = textField.getText();
 
-        // string must not be empty or contain the separator string
-        if (str != null && str.length() > 0 && !str.contains(SEPARATOR)) {
+        // string must not be empty or contain the separator string or contain an extension already listed
+        if (str != null && str.length() > 0 && !str.contains(SEPARATOR) && !Arrays.asList(list.getItems()).contains(str)) {
             list.add(str);
             textField.setText("");
         }
