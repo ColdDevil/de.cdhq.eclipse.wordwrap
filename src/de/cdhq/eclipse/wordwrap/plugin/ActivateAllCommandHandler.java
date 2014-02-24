@@ -14,9 +14,6 @@ package de.cdhq.eclipse.wordwrap.plugin;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IEditorReference;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -29,18 +26,9 @@ import org.eclipse.ui.handlers.HandlerUtil;
 public class ActivateAllCommandHandler extends AbstractHandler {
     public Object execute(ExecutionEvent event) throws ExecutionException {
         // get workbench window and the current page to access editors
-        IWorkbenchWindow wb = HandlerUtil.getActiveWorkbenchWindow(event); // org.eclipse.ui.internal.WorkbenchWindow
-        IWorkbenchPage page = wb.getActivePage();
+        IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindow(event); // org.eclipse.ui.internal.WorkbenchWindow
 
-        // iterate all open editors
-        IEditorReference[] editors = page.getEditorReferences();
-
-        for (IEditorReference e : editors) {
-            // get editor and reactivate it
-            IEditorPart editor = e.getEditor(true);
-
-            WordWrapUtils.setWordWrap(editor, true);
-        }
+        WordWrapUtils.setWordWrapInWindow(window, true);
 
         return null;
     }

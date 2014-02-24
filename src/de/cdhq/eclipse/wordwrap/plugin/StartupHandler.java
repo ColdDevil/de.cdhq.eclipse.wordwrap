@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.cdhq.eclipse.wordwrap.plugin;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IStartup;
@@ -38,6 +39,17 @@ public class StartupHandler implements IStartup {
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
                 IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+
+                // get preference store of this plugin
+                IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+
+                // check auto word wrap on startup
+                if (preferenceStore.getBoolean("de.cdhq.eclipse.wordwrap.autoenable.onstartup")) {
+                    System.out.println("onSTart is enabled: setting window..");
+                    WordWrapUtils.setWordWrapInWindow(workbenchWindow, true);
+                }
+
+                // auto word wrap: listen to opening of editors events  
                 if (workbenchWindow != null) {
                     workbenchWindow.getPartService().addPartListener(new IPartListener2() {
                         @Override

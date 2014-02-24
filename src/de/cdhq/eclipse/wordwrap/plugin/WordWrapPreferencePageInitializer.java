@@ -23,6 +23,9 @@ public class WordWrapPreferencePageInitializer extends AbstractPreferenceInitial
     public void initializeDefaultPreferences() {
         IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 
+        // enable auto word wrap for all open editors on startup by default
+        store.setDefault("de.cdhq.eclipse.wordwrap.autoenable.onstartup", true);
+        
         // enable auto word wrap by default
         store.setDefault("de.cdhq.eclipse.wordwrap.autoenable.enabled", true);
 

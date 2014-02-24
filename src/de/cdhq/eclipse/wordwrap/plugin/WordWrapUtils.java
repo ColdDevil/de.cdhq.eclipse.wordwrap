@@ -13,6 +13,9 @@ package de.cdhq.eclipse.wordwrap.plugin;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 
 public class WordWrapUtils {
     /**
@@ -23,15 +26,17 @@ public class WordWrapUtils {
      * @author Florian Weßling <flo@cdhq.de>
      */
     public static void toggleWordWrap(IEditorPart editor) {
-        if (editor != null) {
-            // editor (IEditorPart) adapter returns StyledText
-            Object text = editor.getAdapter(Control.class);
-            if (text instanceof StyledText) {
-                StyledText styledText = (StyledText) text;
+        if (editor == null) {
+            return;
+        }
 
-                // toggle wrapping
-                styledText.setWordWrap(!styledText.getWordWrap());
-            }
+        // editor (IEditorPart) adapter returns StyledText
+        Object text = editor.getAdapter(Control.class);
+        if (text instanceof StyledText) {
+            StyledText styledText = (StyledText) text;
+
+            // toggle wrapping
+            styledText.setWordWrap(!styledText.getWordWrap());
         }
     }
 
@@ -45,15 +50,45 @@ public class WordWrapUtils {
      * @author Florian Weßling <flo@cdhq.de>
      */
     public static void setWordWrap(IEditorPart editor, boolean state) {
-        if (editor != null) {
-            // editor (IEditorPart) adapter returns StyledText
-            Object text = editor.getAdapter(Control.class);
-            if (text instanceof StyledText) {
-                StyledText styledText = (StyledText) text;
+        if (editor == null) {
+            return;
+        }
 
-                // set wrapping
-                styledText.setWordWrap(state);
-            }
+        // editor (IEditorPart) adapter returns StyledText
+        Object text = editor.getAdapter(Control.class);
+        if (text instanceof StyledText) {
+            StyledText styledText = (StyledText) text;
+
+            // set wrapping
+            styledText.setWordWrap(state);
+        }
+    }
+
+    /**
+     * Sets the word wrap property of all editors of a given workbench window.
+     * 
+     * @param window
+     *            Workbench window in which the editors will be altered
+     * @param state
+     *            Desired state of word wrap
+     * @author Florian Weßling <flo@cdhq.de>
+     */
+    public static void setWordWrapInWindow(IWorkbenchWindow window, boolean state) {
+        System.out.println("SET IN WINDOW to "+state);
+        if (window == null) {
+            return;
+        }
+
+        IWorkbenchPage page = window.getActivePage();
+
+        // iterate all open editors
+        IEditorReference[] editors = page.getEditorReferences();
+
+        for (IEditorReference e : editors) {
+            // get editor and reactivate it
+            IEditorPart editor = e.getEditor(true);
+
+            WordWrapUtils.setWordWrap(editor, state);
         }
     }
 }
