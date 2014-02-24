@@ -7,5 +7,5 @@ http://dev.cdhq.de/eclipse/word-wrap/
 
 Change Log
 ----------
-2014-02-24: Added auto word wrap on startup
-2014-02-14: Added auto word wrap for file extensions chosen by the user
+* 2014-02-24: Added auto word wrap on startup
+* 2014-02-14: Added auto word wrap for file extensions chosen by the user
