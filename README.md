@@ -9,3 +9,4 @@ Change Log
 ----------
 * 2014-02-24: Added auto word wrap on startup
 * 2014-02-14: Added auto word wrap for file extensions chosen by the user
+* 2014-03-06: Fixed #1: "Null pointer exception on viewing file without file extension"
