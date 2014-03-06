@@ -25,11 +25,14 @@ public class WordWrapPreferencePageInitializer extends AbstractPreferenceInitial
 
         // enable auto word wrap for all open editors on startup by default
         store.setDefault("de.cdhq.eclipse.wordwrap.autoenable.onstartup", true);
-        
+
         // enable auto word wrap by default
         store.setDefault("de.cdhq.eclipse.wordwrap.autoenable.enabled", true);
 
         // enable auto word wrap for LaTeX, Java, text and XML files
         store.setDefault("de.cdhq.eclipse.wordwrap.autoenable.extensions", "tex;java;txt;xml");
+
+        // disable auto word wrap for all files by default
+        store.setDefault("de.cdhq.eclipse.wordwrap.autoenable.forall", false);
     }
 }

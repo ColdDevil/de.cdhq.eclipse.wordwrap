@@ -40,7 +40,7 @@ public class ActivateOnFileOpenHandler {
             /*
              * Some of the possible editor types and their input:
              * 
-             * - Text editor: 
+             * - Text editor:
              *   part = org.eclipse.ui.editors.text.TextEditor
              *   editorInput = org.eclipse.ui.part.FileEditorInput(/ProjectName/Example.txt)
              *   editorInput = org.eclipse.ui.internal.editors.text.NonExistingFileEditorInput
@@ -56,6 +56,12 @@ public class ActivateOnFileOpenHandler {
              */
             IEditorPart editorPart = (IEditorPart) part;
 
+            // immediately activate word wrap when it is enabled for all files
+            if (preferenceStore.getBoolean("de.cdhq.eclipse.wordwrap.autoenable.forall")) {
+                WordWrapUtils.setWordWrap(editorPart, true);
+                return;
+            }
+
             // get file name of editor's input
             IEditorInput input = editorPart.getEditorInput();
             IFile file = ResourceUtil.getFile(input);
@@ -64,8 +70,8 @@ public class ActivateOnFileOpenHandler {
             if (file != null) {
                 String fileExtension = file.getFileExtension();
 
-                // stop if file extension is empty
-                if (fileExtension.isEmpty()) {
+                // stop if file extension is empty (i.e. null)
+                if (fileExtension == null) {
                     return;
                 }
 
