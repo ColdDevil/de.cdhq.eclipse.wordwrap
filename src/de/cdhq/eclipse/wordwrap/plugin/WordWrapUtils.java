@@ -74,7 +74,6 @@ public class WordWrapUtils {
      * @author Florian Weßling <flo@cdhq.de>
      */
     public static void setWordWrapInWindow(IWorkbenchWindow window, boolean state) {
-        System.out.println("SET IN WINDOW to "+state);
         if (window == null) {
             return;
         }

@@ -45,7 +45,6 @@ public class StartupHandler implements IStartup {
 
                 // check auto word wrap on startup
                 if (preferenceStore.getBoolean("de.cdhq.eclipse.wordwrap.autoenable.onstartup")) {
-                    System.out.println("onSTart is enabled: setting window..");
                     WordWrapUtils.setWordWrapInWindow(workbenchWindow, true);
                 }
 
