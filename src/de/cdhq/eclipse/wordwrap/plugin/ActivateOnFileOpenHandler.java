@@ -30,11 +30,6 @@ public class ActivateOnFileOpenHandler {
         // get preference store of this plugin
         IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
-        // check if auto word wrap is enabled
-        if (!preferenceStore.getBoolean("de.cdhq.eclipse.wordwrap.autoenable.enabled")) {
-            return;
-        }
-
         IWorkbenchPart part = partRef.getPart(true);
         if (part instanceof IEditorPart) {
             /*
@@ -59,6 +54,11 @@ public class ActivateOnFileOpenHandler {
             // immediately activate word wrap when it is enabled for all files
             if (preferenceStore.getBoolean("de.cdhq.eclipse.wordwrap.autoenable.forall")) {
                 WordWrapUtils.setWordWrap(editorPart, true);
+                return;
+            }
+
+            // check if auto word wrap is enabled for file extensions
+            if (!preferenceStore.getBoolean("de.cdhq.eclipse.wordwrap.autoenable.forextensions")) {
                 return;
             }
 
