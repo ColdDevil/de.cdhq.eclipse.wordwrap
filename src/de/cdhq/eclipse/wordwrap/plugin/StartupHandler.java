@@ -20,17 +20,17 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * Handler for registering listeners at startup.
- * 
+ *
  * I know that using the org.eclipse.ui.startup extension point is not recommended [1] as it breaks the lazy-loading principle of plugins.
  * Unfortunately I don't have a better solution in mind yet so consider this as a workaround and tell me if you have any suggestions. ;-)
- * 
+ *
  * "The registration of the listener should have been done in the UI
  * thread since PlatformUI.getWorkbench().getActiveWorkbenchWindow()
- * returns null if it is called outside of the UI thread."[2]
- * 
+ * returns null if it is called outside of the UI thread." [2]
+ *
  * [1] https://wiki.eclipse.org/FAQ_Can_I_activate_my_plug-in_when_the_workbench_starts%3F
  * [2] http://www.eclipse.org/forums/index.php/t/206897/
- * 
+ *
  * @author Florian Weßling <flo@cdhq.de>
  */
 public class StartupHandler implements IStartup {

@@ -36,9 +36,10 @@ public class ActivateOnFileOpenHandler {
              * Some of the possible editor types and their input:
              * 
              * - Text editor:
-             *   part = org.eclipse.ui.editors.text.TextEditor
              *   editorInput = org.eclipse.ui.part.FileEditorInput(/ProjectName/Example.txt)
+             *     (when opening a file)
              *   editorInput = org.eclipse.ui.internal.editors.text.NonExistingFileEditorInput
+             *     (after creating a new file with the new wizard)
              *   
              * - Java editor (JDT):
              *   part = org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor
@@ -76,7 +77,7 @@ public class ActivateOnFileOpenHandler {
                 }
 
                 // get extensions from preference store
-                String[] extensions = ExtensionListFieldEditor.parseString(preferenceStore.getString("de.cdhq.eclipse.wordwrap.autoenable.extensions"));
+                String[] extensions = ExtensionListFieldEditor.parseString(preferenceStore.getString("de.cdhq.eclipse.wordwrap.autoenable.forextensions.extensions"));
 
                 // check if extension is covered by extensioned selected in preferences
                 for (String ext : extensions) {

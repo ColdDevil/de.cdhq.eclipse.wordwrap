@@ -22,15 +22,15 @@
             class="de.cdhq.eclipse.wordwrap.plugin.ToggleCommandHandler"
             commandId="de.cdhq.eclipse.wordwrap.toggleCommand">
         </handler>
-        <!-- Handler for activating toggle-all command -->       
+        <!-- Handler for activating-all command -->       
         <handler
             class="de.cdhq.eclipse.wordwrap.plugin.ActivateAllCommandHandler"
             commandId="de.cdhq.eclipse.wordwrap.activateAllCommand">
         </handler>
     </extension>
     
-    <!-- Add Menu Entries -->
     <extension point="org.eclipse.ui.menus">
+        <!-- Add Menu Entries -->
         <menuContribution locationURI="menu:edit?after=additions">
             <command
                commandId="de.cdhq.eclipse.wordwrap.toggleCommand">
@@ -41,10 +41,7 @@
                commandId="de.cdhq.eclipse.wordwrap.activateAllCommand">
             </command>
         </menuContribution>
-    </extension>
-    
-    <!-- Add context menu entry -->
-    <extension point="org.eclipse.ui.menus">
+        <!-- Add context menu entry -->
         <menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
             <command
                 commandId="de.cdhq.eclipse.wordwrap.toggleCommand"
@@ -60,7 +57,7 @@
         </menuContribution>
     </extension>
     
-    <!-- Keyboard shortcut for single toggling: CTRL+ALT+E on Windows, CMD+ALT+E on OS X -->
+    <!-- Keyboard shortcut for toggling word wrap in current editor: CTRL+ALT+E on Windows, CMD+ALT+E on OS X -->
     <extension point="org.eclipse.ui.bindings">
         <key
             commandId="de.cdhq.eclipse.wordwrap.toggleCommand"

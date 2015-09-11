@@ -12,12 +12,10 @@ package de.cdhq.eclipse.wordwrap.plugin;
 
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 public class WordWrapUtils {
     /**
@@ -32,34 +30,13 @@ public class WordWrapUtils {
             return;
         }
 
-        System.out.println("EDITOR: " + editor);
-
-        /*
-         * editor (IEditorPart) adapter returns StyledText for:
-         * - org.eclipse.ui.editors.text.TextEditor
-         * 
-         * returns null for:
-         * - org.eclipse.compare.internal.CompareEditor
-         * 
-         * adapter for Control calls fSourceViewer.getTextWidget() in org.eclipse.ui.texteditor.AbstractTextEditor
-         */
+        // editor (IEditorPart) adapter returns StyledText
         Object text = editor.getAdapter(Control.class);
-        System.out.println("TEXT: " + text);
         if (text instanceof StyledText) {
             StyledText styledText = (StyledText) text;
 
             // toggle wrapping
             styledText.setWordWrap(!styledText.getWordWrap());
-        } else if (text == null) {
-
-            IContentOutlinePage test = (IContentOutlinePage) editor.getAdapter(IContentOutlinePage.class);
-            System.out.println("TEST: " + test);
-            System.out.println("IEditorInput.class: " + editor.getAdapter(IEditorInput.class)); // org.eclipse.ui.part.FileEditorInput(/Test123/DiffA.txt)
-            if (test != null) {
-                System.out.println("IContentOutlinePage.getControl: " + test.getControl());
-            } else {
-                System.out.println("IContentOutlinePage.getControl: test is null");
-            }
         }
     }
 

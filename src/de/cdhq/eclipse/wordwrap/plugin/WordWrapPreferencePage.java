@@ -33,7 +33,7 @@ public class WordWrapPreferencePage extends FieldEditorPreferencePage implements
                                         getFieldEditorParent()));
 
         // list of file extensions for auto word wrap
-        addField(new ExtensionListFieldEditor("de.cdhq.eclipse.wordwrap.autoenable.extensions",
+        addField(new ExtensionListFieldEditor("de.cdhq.eclipse.wordwrap.autoenable.forextensions.extensions",
                                               "File Extensions:",
                                               "Add",
                                               "Remove",
@@ -41,7 +41,7 @@ public class WordWrapPreferencePage extends FieldEditorPreferencePage implements
 
         // auto wrap for all files?
         addField(new BooleanFieldEditor("de.cdhq.eclipse.wordwrap.autoenable.forall",
-                                        "Automatically enable word wrap for all opened files",
+                                        "Automatically enable word wrap for all newly opened files",
                                         getFieldEditorParent()));
     }
 
