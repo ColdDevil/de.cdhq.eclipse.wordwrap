@@ -36,7 +36,7 @@ public class ExtensionListFieldEditor extends FieldEditor {
     // Height of list in dialog units (see org.eclipse.jface.preference.FieldEditor.convertVerticalDLUsToPixels())
     private static final int    LIST_HEIGHT_IN_DLUS = 80;
 
-    // The string used to seperate list items in a single String representation
+    // The string used to separate list items in a single String representation
     private static final String SEPARATOR           = ";";
 
     // Top-level control for the field editor.
@@ -182,7 +182,7 @@ public class ExtensionListFieldEditor extends FieldEditor {
     }
 
     /**
-     * Parses the string into seperate list items and adds them to the list
+     * Parses the string into separate list items and adds them to the list
      * 
      * @param items
      *            String of concatenated items
